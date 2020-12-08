@@ -9,7 +9,7 @@ function getTodos() {
     // })
     // .then(res=>showOutput(res))
     // .catch(err=>console.error(err))
-    axios.get("https://jsonplaceholder.typicode.com/posts", {params:{_limit:4}})
+    axios.get("https://jsonplaceholder.typicode.com/posts?_limit=3")
     .then(res=>showOutput(res))
     .catch(err=>console.error(err))
 
