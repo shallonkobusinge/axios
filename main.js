@@ -48,7 +48,12 @@ function getTodos() {
   
   // DELETE REQUEST
   function removeTodo() {
-    console.log('DELETE Request');
+axios({
+    method:"delete",
+    url:"https://jsonplaceholder.typicode.com/posts/11"
+})
+.then(res=>showOutput(res))
+.catch(err=>console.error(err))
   }
   
   // SIMULTANEOUS DATA
