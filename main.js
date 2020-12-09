@@ -58,7 +58,12 @@ axios({
   
   // SIMULTANEOUS DATA
   function getData() {
-    console.log('Simultaneous Request');
+axios.all([
+  axios.get("https://jsonplaceholder.typicode.com/todos"),
+  axios.get("https://jsonplaceholder.typicode.com/posts")
+])
+.then(axios.spread((todos,posts) => showOutput(todos)))
+.catch(erro => Console.error(erro))
   }
   
   // CUSTOM HEADERS
@@ -81,6 +86,21 @@ axios({
     console.log('Cancel Token');
   }
   
+axios.interceptors.request.use(config => {
+  const today = Date.now();
+console.log(`${config.method.toUpperCase()} request sent to ${config.url} at ${new Date().getTime()}`)
+console.log(new Intl.DateTimeFormat('en-US', 
+{
+  year:'numeric', month:'2-digit',
+day: '2-digit', 
+hour: '2-digit', minute: '2-digit',
+ second: '2-digit'}).format(today));
+return config;
+}, 
+error => {return Promise.reject(error)
+}
+  )
+
   // INTERCEPTING REQUESTS & RESPONSES
   
   // AXIOS INSTANCES
